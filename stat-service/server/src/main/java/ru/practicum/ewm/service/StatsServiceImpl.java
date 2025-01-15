@@ -5,8 +5,8 @@ import org.springframework.stereotype.Service;
 import ru.practicum.ewm.Endpoint;
 import ru.practicum.ewm.ViewStats;
 import ru.practicum.ewm.ViewsStatsRequest;
-import ru.practicum.ewm.repository.StatsRepository;
 import ru.practicum.ewm.exceptions.BadRequestException;
+import ru.practicum.ewm.repository.StatsRepository;
 
 import java.util.List;
 
@@ -22,7 +22,7 @@ public class StatsServiceImpl implements StatsService {
 
     @Override
     public List<ViewStats> getViewStatsList(ViewsStatsRequest request) {
-        if (request.getStart().isAfter(request.getEnd()) || request.getStart().isEqual(request.getEnd())){
+        if (request.getStart().isAfter(request.getEnd()) || request.getStart().isEqual(request.getEnd())) {
             throw new BadRequestException("Дата старта поиска не может быть больше даты окончания");
         }
         if (request.isUnique()) {

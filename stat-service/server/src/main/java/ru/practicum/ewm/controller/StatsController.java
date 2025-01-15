@@ -7,7 +7,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.ewm.Endpoint;
-
 import ru.practicum.ewm.ViewStats;
 import ru.practicum.ewm.ViewsStatsRequest;
 import ru.practicum.ewm.service.StatsService;
