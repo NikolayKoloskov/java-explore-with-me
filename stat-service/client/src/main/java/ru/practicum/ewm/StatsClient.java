@@ -31,7 +31,7 @@ public class StatsClient extends BaseClient {
     }
 
     public ResponseEntity<Object> saveHit(HttpServletRequest request) {
-        final Endpoint hit = Endpoint.builder()
+        final EndpointHit hit = EndpointHit.builder()
                 .app(applicationName)
                 .uri(request.getRequestURI())
                 .ip(request.getRemoteAddr())

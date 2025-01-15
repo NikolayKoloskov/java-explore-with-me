@@ -3,7 +3,7 @@ package ru.practicum.ewm.repository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
-import ru.practicum.ewm.Endpoint;
+import ru.practicum.ewm.EndpointHit;
 import ru.practicum.ewm.ViewStats;
 import ru.practicum.ewm.ViewsStatsRequest;
 import ru.practicum.ewm.mapper.ViewStatsMapper;
@@ -19,7 +19,7 @@ public class StatsRepositoryImpl implements StatsRepository {
     private final ViewStatsMapper viewStatsMapper;
 
     @Override
-    public void saveHit(Endpoint hit) {
+    public void saveHit(EndpointHit hit) {
         jdbcTemplate.update("INSERT INTO stats (app, uri, ip, created) VALUES (?, ?, ?, ?)",
                 hit.getApp(), hit.getUri(), hit.getIp(), Timestamp.valueOf(hit.getTimestamp()));
     }
