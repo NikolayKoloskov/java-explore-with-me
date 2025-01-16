@@ -15,7 +15,6 @@
     <packaging>pom</packaging>
 
     <name>stats-service</name>
-
     <modules>
         <module>server</module>
         <module>client</module>
