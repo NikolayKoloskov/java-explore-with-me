@@ -6,7 +6,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import ru.practicum.EndpointHit;
+import ru.practicum.StatRequest;
 import ru.practicum.ViewStats;
 import ru.practicum.ViewsStatsRequest;
 import ru.practicum.exceptions.BadRequestException;
@@ -29,13 +29,13 @@ public class StatsServiceImplTest {
     @InjectMocks
     private StatsServiceImpl statsService;
 
-    private EndpointHit endpointHit;
+    private StatRequest statRequest;
     private ViewsStatsRequest viewsStatsRequest;
 
 
     @BeforeEach
     public void setUp() {
-        endpointHit = new EndpointHit().builder()
+        statRequest = new StatRequest().builder()
                 .app("ewm-main-service")
                 .uri("test-uri/1")
                 .ip("127.0.0.1")
@@ -45,7 +45,7 @@ public class StatsServiceImplTest {
         viewsStatsRequest = new ViewsStatsRequest().toBuilder()
                 .start(LocalDateTime.now())
                 .end(LocalDateTime.now().plusHours(1))
-                .uris("/uri")
+                .uri("/uri")
                 .unique(false)
                 .build();
 
@@ -53,9 +53,9 @@ public class StatsServiceImplTest {
 
     @Test
     public void testSaveHit() {
-        statsService.saveHit(endpointHit);
+        statsService.saveHit(statRequest);
 
-        verify(statsRepository, times(1)).saveHit(endpointHit);
+        verify(statsRepository, times(1)).saveHit(statRequest);
     }
 
     @Test
@@ -74,7 +74,7 @@ public class StatsServiceImplTest {
         viewsStatsRequest = new ViewsStatsRequest().toBuilder()
                 .start(LocalDateTime.now().minusHours(1))
                 .end(LocalDateTime.now())
-                .uris("/uri")
+                .uri("/uri")
                 .unique(true)
                 .build();
         List<ViewStats> viewStatsList = Collections.emptyList();
@@ -90,7 +90,7 @@ public class StatsServiceImplTest {
         viewsStatsRequest = new ViewsStatsRequest().toBuilder()
                 .start(LocalDateTime.now().plusHours(10))
                 .end(LocalDateTime.now())
-                .uris("/uri")
+                .uri("/uri")
                 .unique(false)
                 .build();
 

@@ -10,7 +10,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import ru.practicum.EndpointHit;
+import ru.practicum.StatRequest;
 import ru.practicum.ViewStats;
 import ru.practicum.ViewsStatsRequest;
 import ru.practicum.controller.StatsController;
@@ -43,7 +43,7 @@ class StatsControllerTest {
         ViewsStatsRequest viewsStatsRequest = ViewsStatsRequest.builder()
                 .start(LocalDateTime.now())
                 .end(LocalDateTime.now().plusHours(10))
-                .uris("/uri1")
+                .uri("/uri1")
                 .application("test-app")
                 .build();
 
@@ -53,7 +53,7 @@ class StatsControllerTest {
                         .content(objectMapper.writeValueAsString(viewsStatsRequest)))
                 .andExpect(status().isCreated());
 
-        verify(statsService, times(1)).saveHit(any(EndpointHit.class));
+        verify(statsService, times(1)).saveHit(any(StatRequest.class));
     }
 
     @Test
@@ -61,7 +61,7 @@ class StatsControllerTest {
         ViewsStatsRequest viewsStatsRequest = ViewsStatsRequest.builder()
                 .start(LocalDateTime.now())
                 .end(LocalDateTime.now().plusHours(10))
-                .uris("/uri1")
+                .uri("/uri1")
                 .application("test-app")
                 .unique(false)
                 .build();
@@ -71,7 +71,7 @@ class StatsControllerTest {
         mockMvc.perform(get("/stats")
                         .param("start", viewsStatsRequest.getStart().toString())
                         .param("end", viewsStatsRequest.getEnd().toString())
-                        .param("uris", viewsStatsRequest.getUris())
+                        .param("uris", viewsStatsRequest.getUri())
                         .param("unique", String.valueOf(viewsStatsRequest.isUnique()))
                         .param("application", viewsStatsRequest.getApplication()))
                 .andExpect(status().isOk());

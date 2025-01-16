@@ -2,7 +2,7 @@ package ru.practicum.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import ru.practicum.EndpointHit;
+import ru.practicum.StatRequest;
 import ru.practicum.ViewStats;
 import ru.practicum.ViewsStatsRequest;
 import ru.practicum.exceptions.BadRequestException;
@@ -16,7 +16,7 @@ public class StatsServiceImpl implements StatsService {
     private final StatsRepository statRepository;
 
     @Override
-    public void saveHit(EndpointHit hit) {
+    public void saveHit(StatRequest hit) {
         statRepository.saveHit(hit);
     }
 

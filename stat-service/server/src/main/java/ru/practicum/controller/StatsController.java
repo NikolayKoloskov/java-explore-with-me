@@ -6,7 +6,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
-import ru.practicum.EndpointHit;
+import ru.practicum.StatRequest;
 import ru.practicum.ViewStats;
 import ru.practicum.ViewsStatsRequest;
 import ru.practicum.service.StatsService;
@@ -23,7 +23,7 @@ public class StatsController {
 
     @PostMapping("/hit")
     @ResponseStatus(code = HttpStatus.CREATED)
-    public void hit(@RequestBody EndpointHit hit) {
+    public void hit(@RequestBody StatRequest hit) {
         log.info("POST - сохранения вызова hit {}", hit);
         service.saveHit(hit);
     }
@@ -43,7 +43,7 @@ public class StatsController {
                 ViewsStatsRequest.builder()
                         .start(start)
                         .end(end)
-                        .uris(uris)
+                        .uri(uris)
                         .unique(unique)
                         .build()
         );
