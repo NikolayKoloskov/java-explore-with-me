@@ -28,6 +28,7 @@ public class BaseClient {
         HttpEntity<T> requestEntity = new HttpEntity<>(body, defaultHeaders());
 
         try {
+            assert parameters != null;
             return restTemplate.exchange(path, method, requestEntity, Object.class, parameters);
         } catch (HttpStatusCodeException e) {
             return ResponseEntity.status(e.getStatusCode()).body(e.getResponseBodyAsByteArray());
