@@ -27,7 +27,6 @@ public class StatRequest {
 
     @NotNull
     @NotBlank
-
     private String ip;
 
     @NotNull

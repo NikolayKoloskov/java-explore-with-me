@@ -17,6 +17,7 @@ import ru.practicum.controller.StatsController;
 import ru.practicum.service.StatsService;
 
 import java.time.LocalDateTime;
+import java.util.Collections;
 import java.util.List;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -40,17 +41,18 @@ class StatsControllerTest {
 
     @Test
     public void testHit() throws Exception {
-        ViewsStatsRequest viewsStatsRequest = ViewsStatsRequest.builder()
-                .start(LocalDateTime.now())
-                .end(LocalDateTime.now().plusHours(10))
+        StatRequest statRequest = StatRequest.builder()
+                .id(1)
+                .timestamp(LocalDateTime.now())
                 .uri("/uri1")
-                .application("test-app")
+                .app("test-app")
+                .ip("127.0.0.1")
                 .build();
 
         mockMvc.perform(post("/hit")
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(viewsStatsRequest)))
+                        .content(objectMapper.writeValueAsString(statRequest)))
                 .andExpect(status().isCreated());
 
         verify(statsService, times(1)).saveHit(any(StatRequest.class));
@@ -61,7 +63,7 @@ class StatsControllerTest {
         ViewsStatsRequest viewsStatsRequest = ViewsStatsRequest.builder()
                 .start(LocalDateTime.now())
                 .end(LocalDateTime.now().plusHours(10))
-                .uri("/uri1")
+                .uri(List.of("/uri1"))
                 .application("test-app")
                 .unique(false)
                 .build();
@@ -71,7 +73,7 @@ class StatsControllerTest {
         mockMvc.perform(get("/stats")
                         .param("start", viewsStatsRequest.getStart().toString())
                         .param("end", viewsStatsRequest.getEnd().toString())
-                        .param("uris", viewsStatsRequest.getUri())
+                        .param("uri", String.valueOf(List.of(viewsStatsRequest.getUri())))
                         .param("unique", String.valueOf(viewsStatsRequest.isUnique()))
                         .param("application", viewsStatsRequest.getApplication()))
                 .andExpect(status().isOk());

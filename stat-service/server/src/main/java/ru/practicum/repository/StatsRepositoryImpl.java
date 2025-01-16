@@ -27,7 +27,9 @@ public class StatsRepositoryImpl implements StatsRepository {
     @Override
     public List<ViewStats> getStats(ViewsStatsRequest request) {
         String query = "SELECT app, uri, COUNT (ip) AS hits FROM stats WHERE (created >= ? AND created <= ?) ";
-        query += request.getUri();
+        if (!request.getUri().isEmpty()) {
+            query += createUrisQuery(request.getUri());
+        }
         query += " GROUP BY app, uri ORDER BY hits DESC";
         return jdbcTemplate.query(query, viewStatsMapper, request.getStart(), request.getEnd());
     }
@@ -35,8 +37,16 @@ public class StatsRepositoryImpl implements StatsRepository {
     @Override
     public List<ViewStats> getUniqueStats(ViewsStatsRequest request) {
         String query = "SELECT app, uri, COUNT (DISTINCT ip) AS hits FROM stats WHERE (created >= ? AND created <= ?) ";
-        query += request.getUri();
+        if (!request.getUri().isEmpty()) {
+            query += createUrisQuery(request.getUri());
+        }
         query += " GROUP BY app, uri ORDER BY hits DESC";
         return jdbcTemplate.query(query, viewStatsMapper, request.getStart(), request.getEnd());
+    }
+
+    private String createUrisQuery(List<String> uris) {
+        StringBuilder result = new StringBuilder("AND uri IN ('");
+        result.append(String.join("', '", uris));
+        return result.append("') ").toString();
     }
 }

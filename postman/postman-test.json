@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "3a430a7f-f7e3-49ec-ab41-c4e73dbd255c",
-		"name": "Tests for stats service",
+		"name": "Tests for detatched stats service",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
 		"_exporter_id": "13696577"
 	},

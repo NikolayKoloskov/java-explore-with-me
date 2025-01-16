@@ -3,6 +3,7 @@ package ru.practicum;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @ToString
@@ -10,7 +11,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ViewsStatsRequest {
-    private String uri;
+    private List<String> uri;
     private LocalDateTime start;
     private LocalDateTime end;
     private boolean unique;

@@ -45,7 +45,7 @@ public class StatsServiceImplTest {
         viewsStatsRequest = new ViewsStatsRequest().toBuilder()
                 .start(LocalDateTime.now())
                 .end(LocalDateTime.now().plusHours(1))
-                .uri("/uri")
+                .uri(List.of("/uri"))
                 .unique(false)
                 .build();
 
@@ -74,7 +74,7 @@ public class StatsServiceImplTest {
         viewsStatsRequest = new ViewsStatsRequest().toBuilder()
                 .start(LocalDateTime.now().minusHours(1))
                 .end(LocalDateTime.now())
-                .uri("/uri")
+                .uri(List.of("/uri"))
                 .unique(true)
                 .build();
         List<ViewStats> viewStatsList = Collections.emptyList();
@@ -90,7 +90,7 @@ public class StatsServiceImplTest {
         viewsStatsRequest = new ViewsStatsRequest().toBuilder()
                 .start(LocalDateTime.now().plusHours(10))
                 .end(LocalDateTime.now())
-                .uri("/uri")
+                .uri(List.of("/uri"))
                 .unique(false)
                 .build();
 
