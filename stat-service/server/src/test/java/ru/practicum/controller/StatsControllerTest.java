@@ -1,4 +1,4 @@
-package ru.practicum.ewm.controller;
+package ru.practicum.controller;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
