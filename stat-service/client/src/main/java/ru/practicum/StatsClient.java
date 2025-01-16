@@ -1,4 +1,4 @@
-package ru.practicum.ewm;
+package ru.practicum;
 
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Value;

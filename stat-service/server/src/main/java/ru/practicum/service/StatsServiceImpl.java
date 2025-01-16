@@ -1,12 +1,12 @@
-package ru.practicum.ewm.service;
+package ru.practicum.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import ru.practicum.ewm.EndpointHit;
-import ru.practicum.ewm.ViewStats;
-import ru.practicum.ewm.ViewsStatsRequest;
-import ru.practicum.ewm.exceptions.BadRequestException;
-import ru.practicum.ewm.repository.StatsRepository;
+import ru.practicum.EndpointHit;
+import ru.practicum.ViewStats;
+import ru.practicum.ViewsStatsRequest;
+import ru.practicum.exceptions.BadRequestException;
+import ru.practicum.repository.StatsRepository;
 
 import java.util.List;
 

@@ -1,12 +1,12 @@
-package ru.practicum.ewm.repository;
+package ru.practicum.repository;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
-import ru.practicum.ewm.EndpointHit;
-import ru.practicum.ewm.ViewStats;
-import ru.practicum.ewm.ViewsStatsRequest;
-import ru.practicum.ewm.mapper.ViewStatsMapper;
+import ru.practicum.EndpointHit;
+import ru.practicum.ViewStats;
+import ru.practicum.ViewsStatsRequest;
+import ru.practicum.mapper.ViewStatsMapper;
 
 import java.sql.Timestamp;
 import java.util.List;
@@ -28,7 +28,7 @@ public class StatsRepositoryImpl implements StatsRepository {
     public List<ViewStats> getStats(ViewsStatsRequest request) {
         String query = "SELECT app, uri, COUNT (ip) AS hits FROM stats WHERE (created >= ? AND created <= ?) ";
         if (!request.getUris().isEmpty()) {
-            query += createUriQuery(request.getUris());
+            query += request.getUris();
         }
         query += " GROUP BY app, uri ORDER BY hits DESC";
         return jdbcTemplate.query(query, viewStatsMapper, request.getStart(), request.getEnd());
@@ -38,16 +38,9 @@ public class StatsRepositoryImpl implements StatsRepository {
     public List<ViewStats> getUniqueStats(ViewsStatsRequest request) {
         String query = "SELECT app, uri, COUNT (DISTINCT ip) AS hits FROM stats WHERE (created >= ? AND created <= ?) ";
         if (!request.getUris().isEmpty()) {
-            query += createUriQuery(request.getUris());
+            query += request.getUris();
         }
         query += " GROUP BY app, uri ORDER BY hits DESC";
         return jdbcTemplate.query(query, viewStatsMapper, request.getStart(), request.getEnd());
-    }
-
-
-    private String createUriQuery(List<String> uris) {
-        StringBuilder result = new StringBuilder("AND uri IN ('");
-        result.append(String.join("', '", uris));
-        return result.append("') ").toString();
     }
 }

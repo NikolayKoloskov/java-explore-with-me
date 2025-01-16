@@ -1,8 +1,8 @@
-package ru.practicum.ewm.mapper;
+package ru.practicum.mapper;
 
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
-import ru.practicum.ewm.ViewStats;
+import ru.practicum.ViewStats;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

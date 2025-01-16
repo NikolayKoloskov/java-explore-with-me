@@ -10,10 +10,11 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import ru.practicum.ewm.EndpointHit;
-import ru.practicum.ewm.ViewStats;
-import ru.practicum.ewm.ViewsStatsRequest;
-import ru.practicum.ewm.service.StatsService;
+import ru.practicum.EndpointHit;
+import ru.practicum.ViewStats;
+import ru.practicum.ViewsStatsRequest;
+import ru.practicum.controller.StatsController;
+import ru.practicum.service.StatsService;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -42,14 +43,10 @@ class StatsControllerTest {
         ViewsStatsRequest viewsStatsRequest = ViewsStatsRequest.builder()
                 .start(LocalDateTime.now())
                 .end(LocalDateTime.now().plusHours(10))
-                .uris(List.of("/uri1", "/uri2"))
+                .uris("/uri1")
                 .application("test-app")
                 .build();
-        EndpointHit endpointHit = EndpointHit.builder()
-                .app("test-app")
-                .ip("127.0.0.1")
-                .uri("/uri1")
-                .build();
+
         mockMvc.perform(post("/hit")
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON)
@@ -64,7 +61,7 @@ class StatsControllerTest {
         ViewsStatsRequest viewsStatsRequest = ViewsStatsRequest.builder()
                 .start(LocalDateTime.now())
                 .end(LocalDateTime.now().plusHours(10))
-                .uris(List.of("/uri1"))
+                .uris("/uri1")
                 .application("test-app")
                 .unique(false)
                 .build();
@@ -74,7 +71,7 @@ class StatsControllerTest {
         mockMvc.perform(get("/stats")
                         .param("start", viewsStatsRequest.getStart().toString())
                         .param("end", viewsStatsRequest.getEnd().toString())
-                        .param("uris", viewsStatsRequest.getUris().get(0))
+                        .param("uris", viewsStatsRequest.getUris())
                         .param("unique", String.valueOf(viewsStatsRequest.isUnique()))
                         .param("application", viewsStatsRequest.getApplication()))
                 .andExpect(status().isOk());

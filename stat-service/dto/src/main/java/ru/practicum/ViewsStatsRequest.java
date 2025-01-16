@@ -1,9 +1,8 @@
-package ru.practicum.ewm;
+package ru.practicum;
 
 import lombok.*;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Getter
 @ToString
@@ -11,7 +10,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ViewsStatsRequest {
-    private List<String> uris;
+    private String uris;
     @Builder.Default
     private LocalDateTime start = LocalDateTime.now().withHour(0).withMinute(0).withSecond(0);
     @Builder.Default

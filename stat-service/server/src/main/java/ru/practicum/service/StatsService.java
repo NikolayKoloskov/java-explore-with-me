@@ -1,8 +1,8 @@
-package ru.practicum.ewm.service;
+package ru.practicum.service;
 
-import ru.practicum.ewm.EndpointHit;
-import ru.practicum.ewm.ViewStats;
-import ru.practicum.ewm.ViewsStatsRequest;
+import ru.practicum.EndpointHit;
+import ru.practicum.ViewStats;
+import ru.practicum.ViewsStatsRequest;
 
 import java.util.List;
 

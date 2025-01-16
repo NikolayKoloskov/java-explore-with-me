@@ -1,4 +1,4 @@
-package ru.practicum.ewm.service;
+package ru.practicum.service;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -6,11 +6,11 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import ru.practicum.ewm.EndpointHit;
-import ru.practicum.ewm.ViewStats;
-import ru.practicum.ewm.ViewsStatsRequest;
-import ru.practicum.ewm.exceptions.BadRequestException;
-import ru.practicum.ewm.repository.StatsRepository;
+import ru.practicum.EndpointHit;
+import ru.practicum.ViewStats;
+import ru.practicum.ViewsStatsRequest;
+import ru.practicum.exceptions.BadRequestException;
+import ru.practicum.repository.StatsRepository;
 
 import java.time.LocalDateTime;
 import java.util.Collections;
@@ -45,7 +45,7 @@ public class StatsServiceImplTest {
         viewsStatsRequest = new ViewsStatsRequest().toBuilder()
                 .start(LocalDateTime.now())
                 .end(LocalDateTime.now().plusHours(1))
-                .uris(Collections.singletonList("/uri"))
+                .uris("/uri")
                 .unique(false)
                 .build();
 
@@ -74,7 +74,7 @@ public class StatsServiceImplTest {
         viewsStatsRequest = new ViewsStatsRequest().toBuilder()
                 .start(LocalDateTime.now().minusHours(1))
                 .end(LocalDateTime.now())
-                .uris(Collections.singletonList("/uri"))
+                .uris("/uri")
                 .unique(true)
                 .build();
         List<ViewStats> viewStatsList = Collections.emptyList();
@@ -90,7 +90,7 @@ public class StatsServiceImplTest {
         viewsStatsRequest = new ViewsStatsRequest().toBuilder()
                 .start(LocalDateTime.now().plusHours(10))
                 .end(LocalDateTime.now())
-                .uris(Collections.singletonList("/uri"))
+                .uris("/uri")
                 .unique(false)
                 .build();
 
