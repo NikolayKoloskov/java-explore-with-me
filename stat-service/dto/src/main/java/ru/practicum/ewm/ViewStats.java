@@ -4,8 +4,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
 
-@Builder
 @Getter
+@Builder(toBuilder = true)
 @ToString
 public class ViewStats {
     private String app;
