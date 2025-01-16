@@ -13,11 +13,9 @@ import org.springframework.test.web.servlet.MockMvc;
 import ru.practicum.StatRequest;
 import ru.practicum.ViewStats;
 import ru.practicum.ViewsStatsRequest;
-import ru.practicum.controller.StatsController;
 import ru.practicum.service.StatsService;
 
 import java.time.LocalDateTime;
-import java.util.Collections;
 import java.util.List;
 
 import static org.mockito.ArgumentMatchers.any;
