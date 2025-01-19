@@ -52,7 +52,7 @@ public class EventServiceImpl implements EventService {
     private static final ConflictException MAX_LIMIT_CONFLICT_EXCEPTION = new ConflictException("Событие не обновлено.",
             "Лимит участников исчерпан.");
 
-    @Value("ewm-service")
+    @Value("ewm-main-service")
     private String appName;
 
 

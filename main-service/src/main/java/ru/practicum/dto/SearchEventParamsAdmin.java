@@ -30,6 +30,7 @@ public class SearchEventParamsAdmin {
     private LocalDateTime end;
 
     @PositiveOrZero
+    @Builder.Default
     private Integer from = 0;
     @Positive
     @Builder.Default
