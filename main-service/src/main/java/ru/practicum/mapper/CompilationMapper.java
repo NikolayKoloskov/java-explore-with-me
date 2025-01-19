@@ -21,7 +21,7 @@ public class CompilationMapper {
     }
 
     public Compilation map(NewCompilationDto compilationDto) {
-        if (compilationDto.getPinned() == null){
+        if (compilationDto.getPinned() == null) {
             compilationDto.setPinned(false);
         }
         return Compilation.builder()
