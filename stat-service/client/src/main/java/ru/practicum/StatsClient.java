@@ -22,7 +22,7 @@ public class StatsClient extends BaseClient {
     @Value("${server.application.name:ewm-main-service}")
     private String applicationName;
 
-    public StatsClient(@Value("${stat.application.url}") String serverUrl, RestTemplateBuilder builder) {
+    public StatsClient(@Value("${stat.application.url:http://localhost:9090}") String serverUrl, RestTemplateBuilder builder) {
         super(
                 builder
                         .uriTemplateHandler(new DefaultUriBuilderFactory(serverUrl))
