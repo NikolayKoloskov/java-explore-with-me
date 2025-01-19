@@ -25,8 +25,10 @@ public class StatsServiceImpl implements StatsService {
         if (request.getStart().isAfter(request.getEnd()) || request.getStart().isEqual(request.getEnd())) {
             throw new BadRequestException("Дата старта поиска не может быть больше даты окончания");
         }
-        if (request.isUnique()) {
-            return statRepository.getUniqueStats(request);
+        if (request.getUnique() != null) {
+            if (request.getUnique()) {
+                return statRepository.getUniqueStats(request);
+            }
         }
 
         return statRepository.getStats(request);

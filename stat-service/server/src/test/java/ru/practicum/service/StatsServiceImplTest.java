@@ -35,7 +35,7 @@ public class StatsServiceImplTest {
 
     @BeforeEach
     public void setUp() {
-        statRequest = new StatRequest().builder()
+        statRequest = StatRequest.builder()
                 .app("ewm-main-service")
                 .uri("test-uri/1")
                 .ip("127.0.0.1")
