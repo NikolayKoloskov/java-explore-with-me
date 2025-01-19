@@ -25,14 +25,14 @@ public class UserController {
     @GetMapping
     public List<UserDto> getUsers(@RequestParam(required = false) List<Long> ids,
                                   @RequestParam(defaultValue = "0") @PositiveOrZero Integer from,
-                                  @RequestParam(defaultValue = "10") @Positive Integer size){
+                                  @RequestParam(defaultValue = "10") @Positive Integer size) {
         log.info("ADMIN - GET запрос на получение пользователей");
         return userService.getListUsers(ids, from, size);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public UserDto createUser(@RequestBody @Valid NewUserRequest newUserRequest){
+    public UserDto createUser(@RequestBody @Valid NewUserRequest newUserRequest) {
         log.info("ADMIN - POST запрос на создание пользователя");
         return userService.addNewUser(newUserRequest);
     }

@@ -8,8 +8,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
-Структура для добавления новой категории
-**/
+ * Структура для добавления новой категории
+ **/
 
 @Data
 @NoArgsConstructor

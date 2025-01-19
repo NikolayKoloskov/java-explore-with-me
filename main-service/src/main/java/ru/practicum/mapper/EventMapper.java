@@ -6,12 +6,10 @@ import ru.practicum.dto.EventShortDto;
 import ru.practicum.dto.NewEventDto;
 import ru.practicum.model.Event;
 
-import java.util.Optional;
-
 @UtilityClass
 public class EventMapper {
     public Event map(NewEventDto newEventDto) {
-        if (newEventDto.getParticipantLimit() == null){
+        if (newEventDto.getParticipantLimit() == null) {
             newEventDto.setParticipantLimit(0);
         }
         return Event.builder()

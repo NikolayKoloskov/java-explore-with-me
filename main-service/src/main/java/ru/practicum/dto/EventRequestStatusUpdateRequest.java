@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import ru.practicum.model.enums.EventStatus;
 import ru.practicum.model.enums.RequestStatus;
 
 import java.util.List;

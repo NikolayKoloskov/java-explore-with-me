@@ -384,21 +384,15 @@ public class EventServiceImpl implements EventService {
                 .min(LocalDateTime::compareTo)
                 .orElse(null);
         Map<Long, Long> viewStatsMap = new HashMap<>();
-        try{
-            Thread.sleep(1000);
-        }
-        catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         if (earliestDate != null) {
-            ResponseEntity<Object> response = statsClient.getStats(earliestDate, LocalDateTime.now(),
+            ResponseEntity<Object> response = statsClient.getStats(earliestDate, LocalDateTime.now().plusSeconds(1),
                     uris, true);
             List<ViewStats> viewStatsList;
             try {
                 viewStatsList = viewStatsMapper.convertValue(response.getBody(), new TypeReference<>() {
                 });
             } catch (IllegalArgumentException e) {
-                if (response.getStatusCode() == HttpStatus.BAD_REQUEST){
+                if (response.getStatusCode() == HttpStatus.BAD_REQUEST) {
                     throw new IncorrectParametersException("Ошибка параметров запроса.", "Некорректный статус - " + response.getStatusCode());
                 }
                 return Collections.emptyMap();
