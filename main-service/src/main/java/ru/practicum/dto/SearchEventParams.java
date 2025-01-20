@@ -23,11 +23,11 @@ public class SearchEventParams {
     private Boolean paid;
     @JsonFormat
             (shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime start;
+    private LocalDateTime rangeStart;
 
     @JsonFormat
             (shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime end;
+    private LocalDateTime rangeEnd;
 
     @Builder.Default
     private Boolean onlyAvailable = false;

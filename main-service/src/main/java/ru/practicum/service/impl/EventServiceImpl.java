@@ -296,8 +296,8 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public List<EventShortDto> getAllEventFromPublic(SearchEventParams searchEventParams, HttpServletRequest request) {
-        if (searchEventParams.getEnd() != null && searchEventParams.getStart() != null) {
-            if (searchEventParams.getEnd().isBefore(searchEventParams.getStart())) {
+        if (searchEventParams.getRangeEnd() != null && searchEventParams.getRangeStart() != null) {
+            if (searchEventParams.getRangeEnd().isBefore(searchEventParams.getRangeStart())) {
                 throw new IncorrectParametersException("Ошибка параметров запроса.", "Дата окончания не может быть раньше даты начала");
             }
         }
@@ -322,13 +322,13 @@ public class EventServiceImpl implements EventService {
                     root.get("category").get("id").in(searchEventParams.getCategories()));
         }
 
-        LocalDateTime startDateTime = Objects.requireNonNullElse(searchEventParams.getStart(), now);
+        LocalDateTime startDateTime = Objects.requireNonNullElse(searchEventParams.getRangeStart(), now);
         specification = specification.and((root, query, criteriaBuilder) ->
                 criteriaBuilder.greaterThan(root.get("eventDate"), startDateTime));
 
-        if (searchEventParams.getEnd() != null) {
+        if (searchEventParams.getRangeEnd() != null) {
             specification = specification.and((root, query, criteriaBuilder) ->
-                    criteriaBuilder.lessThan(root.get("eventDate"), searchEventParams.getEnd()));
+                    criteriaBuilder.lessThan(root.get("eventDate"), searchEventParams.getRangeEnd()));
         } else
             specification = specification.and((root, query, criteriaBuilder) ->
                     criteriaBuilder.greaterThan(root.get("eventDate"), now));

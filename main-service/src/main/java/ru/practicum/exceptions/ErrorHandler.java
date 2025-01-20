@@ -56,7 +56,7 @@ public class ErrorHandler {
     }
 
     @ExceptionHandler({MethodArgumentNotValidException.class, MethodArgumentTypeMismatchException.class,
-            MissingServletRequestParameterException.class, ConstraintViolationException.class})
+            MissingServletRequestParameterException.class})
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ApiError handlerIncorrectParametersException(Exception e) {
         log.debug("Получен статус 400 BAD_REQUEST {}", e.getMessage(), e);
@@ -64,6 +64,18 @@ public class ErrorHandler {
                 .errors(Collections.singletonList(e.getMessage()))
                 .status(HttpStatus.BAD_REQUEST.toString())
                 .message(e.getMessage())
+                .reason(e.getCause().getLocalizedMessage())
+                .build();
+    }
+
+    @ExceptionHandler(ConstraintViolationException.class)
+    @ResponseStatus(HttpStatus.CONFLICT)
+    public ApiError handlerConstraintViolationException(ConstraintViolationException e) {
+        log.debug("Получен статус 409 CONFLICT {}", e.getMessage(), e);
+        return ApiError.builder()
+                .errors(Collections.singletonList(e.getLocalizedMessage()))
+                .status(HttpStatus.CONFLICT.toString())
+                .message("Попытка добавления данных которые уже есть.")
                 .reason(e.getCause().getLocalizedMessage())
                 .build();
     }

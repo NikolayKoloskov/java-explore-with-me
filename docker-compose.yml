@@ -28,7 +28,7 @@ services:
     image: postgres:16.1
     container_name: "stats-db"
     ports:
-      - "6541:5431"
+      - "6541:5432"
     volumes:
       - /var/lib/postgresql/stats-service
     environment:
