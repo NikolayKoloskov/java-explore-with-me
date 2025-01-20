@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -51,9 +50,6 @@ public class EventServiceImpl implements EventService {
 
     private static final ConflictException MAX_LIMIT_CONFLICT_EXCEPTION = new ConflictException("Событие не обновлено.",
             "Лимит участников исчерпан.");
-
-    @Value("ewm-main-service")
-    private String appName;
 
 
     @Override

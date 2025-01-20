@@ -19,16 +19,16 @@ import java.util.Map;
 public class StatsClient extends BaseClient {
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern(Formatter.DATE_FORMAT);
 
-    @Value("${server.application.name:ewm-main-service}")
     private String applicationName;
 
-    public StatsClient(@Value("${stat.application.url:http://stats-server:9090}") String serverUrl, RestTemplateBuilder builder) {
+    public StatsClient(@Value("${stats-server.url}") String serverUrl, @Value("${application.name}") String applicationName, RestTemplateBuilder builder) {
         super(
                 builder
                         .uriTemplateHandler(new DefaultUriBuilderFactory(serverUrl))
                         .requestFactory(() -> new HttpComponentsClientHttpRequestFactory())
                         .build()
         );
+        this.applicationName = applicationName;
     }
 
     public ResponseEntity<Object> saveStats(HttpServletRequest request) {
