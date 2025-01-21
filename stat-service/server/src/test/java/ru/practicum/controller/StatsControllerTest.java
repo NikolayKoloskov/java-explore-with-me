@@ -16,6 +16,7 @@ import ru.practicum.ViewsStatsRequest;
 import ru.practicum.service.StatsService;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -65,14 +66,14 @@ class StatsControllerTest {
                 .application("test-app")
                 .unique(false)
                 .build();
-        List<ViewStats> viewStatsList = List.of((ViewStats.builder().app("test-app").uri("/uri1").hits(1).build()));
+        List<ViewStats> viewStatsList = List.of((ViewStats.builder().app("test-app").uri("/uri1").hits(1L).build()));
         when(statsService.getViewStatsList(any(ViewsStatsRequest.class))).thenReturn(viewStatsList);
 
         mockMvc.perform(get("/stats")
-                        .param("start", viewsStatsRequest.getStart().toString())
-                        .param("end", viewsStatsRequest.getEnd().toString())
+                        .param("start", viewsStatsRequest.getStart().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")))
+                        .param("end", viewsStatsRequest.getEnd().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")))
                         .param("uri", String.valueOf(List.of(viewsStatsRequest.getUri())))
-                        .param("unique", String.valueOf(viewsStatsRequest.isUnique()))
+                        .param("unique", String.valueOf(viewsStatsRequest.getUnique()))
                         .param("application", viewsStatsRequest.getApplication()))
                 .andExpect(status().isOk());
 

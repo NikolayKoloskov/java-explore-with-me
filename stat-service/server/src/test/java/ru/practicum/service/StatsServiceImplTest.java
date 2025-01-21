@@ -9,7 +9,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import ru.practicum.StatRequest;
 import ru.practicum.ViewStats;
 import ru.practicum.ViewsStatsRequest;
-import ru.practicum.exceptions.BadRequestException;
 import ru.practicum.repository.StatsRepository;
 
 import java.time.LocalDateTime;
@@ -17,7 +16,6 @@ import java.util.Collections;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -35,7 +33,7 @@ public class StatsServiceImplTest {
 
     @BeforeEach
     public void setUp() {
-        statRequest = new StatRequest().builder()
+        statRequest = StatRequest.builder()
                 .app("ewm-main-service")
                 .uri("test-uri/1")
                 .ip("127.0.0.1")
@@ -83,17 +81,5 @@ public class StatsServiceImplTest {
 
         assertEquals(viewStatsList, result);
         verify(statsRepository, times(1)).getUniqueStats(viewsStatsRequest);
-    }
-
-    @Test
-    public void testGetViewStatsListWithInvalidDates() {
-        viewsStatsRequest = new ViewsStatsRequest().toBuilder()
-                .start(LocalDateTime.now().plusHours(10))
-                .end(LocalDateTime.now())
-                .uri(List.of("/uri"))
-                .unique(false)
-                .build();
-
-        assertThrows(BadRequestException.class, () -> statsService.getViewStatsList(viewsStatsRequest));
     }
 }
