@@ -6,12 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.experimental.Accessors;
-import ru.practicum.model.Category;
 
-/**
- * DTO for {@link Category}
- */
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
