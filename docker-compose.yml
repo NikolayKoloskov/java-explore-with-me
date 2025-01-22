@@ -42,9 +42,9 @@ services:
       start_period: 10s
       retries: 5
 
-  main-service:
+  ewm-service:
     restart: on-failure
-    build: main-service
+    build: ewm-service
     image: ewm-service
     container_name: "ewm-service"
     ports:
