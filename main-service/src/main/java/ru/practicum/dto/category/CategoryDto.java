@@ -1,4 +1,4 @@
-package ru.practicum.dto;
+package ru.practicum.dto.category;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -7,19 +7,16 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Set;
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class NewCompilationDto {
+public class CategoryDto {
 
-    private Set<Long> events;
-
-    private Boolean pinned;
+    private Long id;
 
     @NotBlank
     @Size(min = 1, max = 50)
-    private String title;
+    private String name;
+
 }

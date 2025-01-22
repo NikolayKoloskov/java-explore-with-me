@@ -1,4 +1,4 @@
-package ru.practicum.dto;
+package ru.practicum.dto.event;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.Positive;
@@ -15,24 +15,19 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class SearchEventParams {
-    private String text;
+public class SearchEventParamsAdmin {
+    private List<Long> users;
+
+    private List<String> states;
 
     private List<Long> categories;
 
-    private Boolean paid;
     @JsonFormat
             (shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime rangeStart;
-
+    private LocalDateTime start;
     @JsonFormat
             (shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime rangeEnd;
-
-    @Builder.Default
-    private Boolean onlyAvailable = false;
-
-    private String sort;
+    private LocalDateTime end;
 
     @PositiveOrZero
     @Builder.Default

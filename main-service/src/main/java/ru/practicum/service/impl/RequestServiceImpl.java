@@ -3,7 +3,7 @@ package ru.practicum.service.impl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import ru.practicum.dto.ParticipationRequestDto;
+import ru.practicum.dto.request.ParticipationRequestDto;
 import ru.practicum.exceptions.ConflictException;
 import ru.practicum.exceptions.IncorrectParametersException;
 import ru.practicum.exceptions.NotFoundException;

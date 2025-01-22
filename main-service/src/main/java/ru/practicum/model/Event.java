@@ -6,6 +6,7 @@ import lombok.*;
 import ru.practicum.model.enums.EventStatus;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Setter
@@ -63,4 +64,8 @@ public class Event {
     private EventStatus eventStatus;
     @Column(name = "title", nullable = false, length = 120)
     private String title;
+
+    @OneToMany
+    @JoinColumn(name = "comments_id")
+    private List<Comment> comments;
 }

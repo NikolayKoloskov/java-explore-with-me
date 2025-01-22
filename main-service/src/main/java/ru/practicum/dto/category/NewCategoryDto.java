@@ -1,22 +1,23 @@
-package ru.practicum.dto;
+package ru.practicum.dto.category;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.experimental.Accessors;
+import ru.practicum.model.Category;
 
 /**
- * Структура для добавления новой категории
- **/
-
-@Data
-@NoArgsConstructor
+ * DTO for {@link Category}
+ */
 @AllArgsConstructor
-@Builder
+@NoArgsConstructor
+@Getter
+@Setter
 public class NewCategoryDto {
-    @NotBlank
     @Size(min = 1, max = 50)
+    @NotBlank
     private String name;
 }

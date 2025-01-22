@@ -16,6 +16,8 @@ import org.springframework.stereotype.Service;
 import ru.practicum.StatsClient;
 import ru.practicum.ViewStats;
 import ru.practicum.dto.*;
+import ru.practicum.dto.event.*;
+import ru.practicum.dto.request.*;
 import ru.practicum.exceptions.ConflictException;
 import ru.practicum.exceptions.CorrelationException;
 import ru.practicum.exceptions.IncorrectParametersException;
