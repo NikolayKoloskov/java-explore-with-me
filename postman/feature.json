@@ -365,14 +365,35 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n    \"text\": \"Update Comment for event from user \"\r\n}",
+                      "raw": "{\r\n    \"text\": \"Update Comment for event from user\"\r\n}",
                       "options": {
                         "raw": {
                           "language": "json"
                         }
                       }
                     },
-                    "url": "{{baseUrl}}/comments/users/{{uid}}/{{commentId}}"
+                    "url": {
+                      "raw": "{{baseUrl}}/comments/users/:userId/:commentId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "comments",
+                        "users",
+                        ":userId",
+                        ":commentId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "userId",
+                          "value": "{{uid}}"
+                        },
+                        {
+                          "key": "commentId",
+                          "value": "{{commentId}}"
+                        }
+                      ]
+                    }
                   },
                   "response": []
                 },
